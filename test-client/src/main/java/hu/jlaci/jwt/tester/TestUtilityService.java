@@ -32,7 +32,7 @@ public class TestUtilityService {
             url += "&accessToken=" + accessToken;
         }
 
-        ResponseEntity response = restTemplate.postForEntity(url, null, Void.class);
+        ResponseEntity<Void> response = restTemplate.postForEntity(url, null, Void.class);
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new RuntimeException("Hibás kérés! Kód: " + response.getStatusCodeValue());
         }

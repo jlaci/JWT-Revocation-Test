@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: BlackList
+    active: Novel
   datasource:
     url: jdbc:mysql://localhost:3306/jwt_db
     driver-class-name: com.mysql.jdbc.Driver

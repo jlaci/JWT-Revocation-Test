@@ -16,15 +16,10 @@ public class ShortLivedTokenValidator implements TokenValidator {
     @Override
     public boolean isValid(String token) {
         try {
-            Jwts.parser().setSigningKey(getSigningKey()).parse(token);
+            Jwts.parser().setSigningKey(secret).parse(token);
             return true;
         } catch (ExpiredJwtException e) {
             return false;
         }
-    }
-
-    @Override
-    public String getSigningKey() {
-        return secret;
     }
 }

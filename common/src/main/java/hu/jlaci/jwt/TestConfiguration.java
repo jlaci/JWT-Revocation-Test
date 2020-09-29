@@ -22,10 +22,11 @@ public class TestConfiguration {
          * Average time between token revocation events
          */
         public static final long T_RVK = 60 * 1000;
-    }
 
-    public static class Costs {
-
+        /**
+         * Number of client groups
+         */
+        public static final int K = 5;
     }
 
 }

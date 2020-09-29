@@ -2,15 +2,45 @@ package hu.jlaci.jwt.auth.service;
 
 import hu.jlaci.jwt.AuthRequest;
 import hu.jlaci.jwt.AuthResponse;
+import hu.jlaci.jwt.user.data.UserEntity;
+import hu.jlaci.jwt.user.service.UserService;
 
 import java.util.Optional;
 
-public interface AuthService {
+public abstract class AuthService {
 
-    Optional<AuthResponse> authenticate(AuthRequest authRequest);
+    protected UserService userService;
+    protected RefreshTokenService refreshTokenService;
 
-    Optional<AuthResponse> requestNewToken(String refreshToken);
+    public AuthService(UserService userService, RefreshTokenService refreshTokenService) {
+        this.userService = userService;
+        this.refreshTokenService = refreshTokenService;
+    }
 
-    void logout(Long userId, String accessToken);
+    public Optional<AuthResponse> authenticate(AuthRequest authRequest) {
+        try {
+            UserEntity user = userService.authenticate(authRequest.getUsername(), authRequest.getPassword());
+            String accessToken = buildAccessToken(user);
+            String refreshToken = refreshTokenService.createRefreshToken(user);
+            return Optional.of(new AuthResponse(accessToken, refreshToken));
+        } catch (UserService.BadUsernameOrPasswordException e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<AuthResponse> requestNewToken(String refreshToken) {
+        try {
+            UserEntity user = refreshTokenService.validateRefreshToken(refreshToken);
+            String accessToken = buildAccessToken(user);
+            String newRefreshToken = refreshTokenService.createRefreshToken(user);
+            return Optional.of(new AuthResponse(accessToken, newRefreshToken));
+        } catch (RefreshTokenService.InvalidTokenException e) {
+            return Optional.empty();
+        }
+    }
+
+    public abstract void logout(Long userId, String accessToken);
+
+    protected abstract String buildAccessToken(UserEntity userEntity);
 
 }

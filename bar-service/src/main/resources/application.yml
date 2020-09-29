@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: BlackList
+    active: Novel
 
 jwt:
   black-list:

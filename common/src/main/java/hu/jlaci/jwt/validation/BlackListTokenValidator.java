@@ -1,6 +1,5 @@
 package hu.jlaci.jwt.validation;
 
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -15,25 +14,20 @@ public class BlackListTokenValidator implements TokenValidator {
     @Value("${jwt.black-list.secret}")
     private String secret;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
     public boolean isValid(String token) {
         try {
-            Jwts.parser().setSigningKey(getSigningKey()).parse(token);
+            Jwts.parser().setSigningKey(secret).parse(token);
             ResponseEntity<Boolean> blacklistResponse = restTemplate.postForEntity("http://localhost:8080/auth/is-blacklisted?accessToken="+ token, null, Boolean.class);
             if (blacklistResponse.getBody() == null) {
                 throw new RuntimeException("Wrong blacklist response!");
             }
 
             return !blacklistResponse.getBody();
-        } catch (ExpiredJwtException e) {
+        } catch (Exception e) {
             return false;
         }
-    }
-
-    @Override
-    public String getSigningKey() {
-        return secret;
     }
 }
