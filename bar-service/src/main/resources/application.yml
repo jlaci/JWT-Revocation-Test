@@ -1,0 +1,10 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active: ShortLived
+
+jwt:
+  short-lived:
+    secret: ZWQ1ODRmNzUtNzQ2MS00NWM2LWI3OGYtZDM2NDA4ZWUwNDcw
