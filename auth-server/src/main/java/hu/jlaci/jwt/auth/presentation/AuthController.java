@@ -43,8 +43,8 @@ public class AuthController {
      * @return
      */
     @PostMapping("logout")
-    public ResponseEntity logout(@RequestParam Long userId) {
-        authService.logout(userId);
+    public ResponseEntity logout(@RequestParam Long userId, @RequestParam(required = false) String accessToken) {
+        authService.logout(userId, accessToken);
         return ResponseEntity.noContent().build();
     }
 

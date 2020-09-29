@@ -60,7 +60,7 @@ public class ShortLivedTokensAuthService implements AuthService {
     }
 
     @Override
-    public void logout(Long userId) {
+    public void logout(Long userId, String accessToken) {
         refreshTokenService.deleteRefreshTokens(userId);
     }
 

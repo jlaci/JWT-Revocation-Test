@@ -56,8 +56,8 @@ public class TestClientThread implements Runnable {
         while (!stopped && Instant.now().isBefore(simulationEnd)) {
             if (Instant.now().isAfter(logOutTime)) {
                 // Check if we have to logout
-                log.info("Client " + id + "logging out");
-                service.logout(id);
+                log.info("Client " + id + " logging out");
+                service.logout(id, accessToken);
                 testResults.loggedOut();
                 setUpAsNewClient();
             } else if (timeForResourceAccess()) {

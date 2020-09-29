@@ -21,7 +21,7 @@ public class NovelAuthService implements AuthService {
     }
 
     @Override
-    public void logout(Long userId) {
+    public void logout(Long userId, String accessToken) {
 
     }
 }

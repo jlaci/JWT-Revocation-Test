@@ -3,8 +3,10 @@ server:
 
 spring:
   profiles:
-    active: ShortLived
+    active: BlackList
 
 jwt:
+  black-list:
+    secret: ZWQ1ODRmNzUtNzQ2MS00NWM2LWI3OGYtZDM2NDA4ZWUwNDcw
   short-lived:
     secret: ZWQ1ODRmNzUtNzQ2MS00NWM2LWI3OGYtZDM2NDA4ZWUwNDcw

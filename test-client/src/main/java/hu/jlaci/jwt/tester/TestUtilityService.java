@@ -26,8 +26,13 @@ public class TestUtilityService {
         return getBody(authResponse);
     }
 
-    public void logout(Long userId) {
-        ResponseEntity response = restTemplate.postForEntity("http://localhost:8080/auth/logout?userId=" + userId, null, Void.class);
+    public void logout(Long userId, String accessToken) {
+        String url = "http://localhost:8080/auth/logout?userId=" + userId;
+        if (accessToken != null) {
+            url += "&accessToken=" + accessToken;
+        }
+
+        ResponseEntity response = restTemplate.postForEntity(url, null, Void.class);
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new RuntimeException("Hibás kérés! Kód: " + response.getStatusCodeValue());
         }
