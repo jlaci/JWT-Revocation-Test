@@ -24,6 +24,11 @@ public class TestConfiguration {
         public static final long T_RVK = 60 * 1000;
 
         /**
+         * Short lived TTL
+         */
+        public static final long T_LIFE = 30 * 1000;
+
+        /**
          * Number of client groups
          */
         public static final int K = 5;

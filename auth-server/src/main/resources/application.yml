@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: Novel
+    active: ShortLived, CalculateCosts
   datasource:
     url: jdbc:mysql://localhost:3306/jwt_db
     driver-class-name: com.mysql.jdbc.Driver
@@ -18,5 +18,4 @@ jwt:
   black-list:
     secret: ZWQ1ODRmNzUtNzQ2MS00NWM2LWI3OGYtZDM2NDA4ZWUwNDcw
   short-lived:
-    ttl: 30
     secret: ZWQ1ODRmNzUtNzQ2MS00NWM2LWI3OGYtZDM2NDA4ZWUwNDcw
