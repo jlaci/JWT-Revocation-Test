@@ -1,6 +1,7 @@
 package hu.jlaci.jwt.auth.service;
 
 import hu.jlaci.jwt.Constants;
+import hu.jlaci.jwt.Util;
 import hu.jlaci.jwt.auth.data.BlackListEntryEntity;
 import hu.jlaci.jwt.auth.data.BlackListEntryRepository;
 import hu.jlaci.jwt.user.data.UserEntity;
@@ -27,6 +28,11 @@ public class BlackListAuthService extends AuthService {
     public BlackListAuthService(UserService userService, RefreshTokenService refreshTokenService, BlackListEntryRepository blackListEntryRepository) {
         super(userService, refreshTokenService);
         this.blackListEntryRepository = blackListEntryRepository;
+
+        // Pre fill the blacklist with some elements for accuracy
+        for (int i = 0; i < 100; i++) {
+            blackListEntryRepository.save(new BlackListEntryEntity(Util.getRandomString(48)));
+        }
     }
 
 

@@ -1,11 +1,13 @@
 spring:
   profiles:
-    active: ShortLived, CalculateCosts
+    active: Novel, CalculateCosts
   datasource:
     url: jdbc:mysql://localhost:3306/jwt_db
     driver-class-name: com.mysql.jdbc.Driver
     username: jwt_user
     password: jwt_password
+    hikari:
+      maximum-pool-size: 100
   jpa:
     hibernate:
       ddl-auto: create-drop

@@ -40,7 +40,7 @@ public class UserService {
     public void init() {
         for (int i = 0; i < TestConfiguration.SystemCharacteristics.N_CLIENTS; i++) {
             String username = "user" + i;
-            if (!userRepository.findByUsername(username).isPresent()) {
+            if (!userRepository.existsByUsername(username)) {
                 log.info("TestUser {} doesn't exist, creating.", username);
                 UserEntity userEntity = new UserEntity();
                 userEntity.setId((long)i);

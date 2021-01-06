@@ -11,12 +11,12 @@ public class TestConfiguration {
         /**
          * Number of clients
          */
-        public static final int N_CLIENTS = 10;
+        public static final int N_CLIENTS = 100;
 
         /**
          * Protected resource access / client / seconds
          */
-        public static final double RESOURCE_ACCESS_FREQUENCY = 0.5;
+        public static final double RESOURCE_ACCESS_FREQUENCY = 2.5;
 
         /**
          * Average time between token revocation events
@@ -31,7 +31,7 @@ public class TestConfiguration {
         /**
          * Number of client groups
          */
-        public static final int K = 5;
+        public static final int K = 20;
     }
 
 }
